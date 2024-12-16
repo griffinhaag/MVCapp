@@ -1,0 +1,55 @@
+@model BookStoreMVCApp.Models.Book
+
+@{
+    ViewBag.Title = "Add Book";
+}
+
+<h2>Add Book</h2>
+
+@using (Html.BeginForm("AddBook", "Book", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        <label for="Title" class="col-md-2 control-label">Title</label>
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Title, new { @class = "form-control", placeholder = "Book Title" })
+            @Html.ValidationMessageFor(m => m.Title, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="Author" class="col-md-2 control-label">Author</label>
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Author, new { @class = "form-control", placeholder = "Author Name" })
+            @Html.ValidationMessageFor(m => m.Author, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="Price" class="col-md-2 control-label">Price</label>
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Price, new { @class = "form-control", placeholder = "Book Price" })
+            @Html.ValidationMessageFor(m => m.Price, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="Quantity" class="col-md-2 control-label">Quantity</label>
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Quantity, new { @class = "form-control", placeholder = "Book Quantity" })
+            @Html.ValidationMessageFor(m => m.Quantity, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Add Book" class="btn btn-primary" />
+        </div>
+    </div>
+}
+
+@if (!string.IsNullOrEmpty(ViewBag.Message))
+{
+    <div class="alert alert-success">@ViewBag.Message</div>
+}

@@ -1,0 +1,35 @@
+@{
+    ViewBag.Title = "Register";
+}
+
+<h2>Register</h2>
+
+@if (!string.IsNullOrEmpty(ViewBag.ErrorMessage as string))
+{
+    <div class="alert alert-danger">@ViewBag.ErrorMessage</div>
+}
+
+@if (!string.IsNullOrEmpty(ViewBag.SuccessMessage as string))
+{
+    <div class="alert alert-success">@ViewBag.SuccessMessage</div>
+}
+
+@using (Html.BeginForm("Register", "Account", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div>
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" />
+    </div>
+    <div>
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" />
+    </div>
+    <div>
+        <label for="confirmPassword">Confirm Password</label>
+        <input type="password" name="confirmPassword" id="confirmPassword" />
+    </div>
+    <div>
+        <button type="submit">Register</button>
+    </div>
+}

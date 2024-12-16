@@ -1,0 +1,48 @@
+@model IEnumerable<BookStoreMVCApp.Models.Book>
+
+@{
+    ViewBag.Title = "Sell Book";
+}
+
+<h2>Sell Book</h2>
+
+@if (Model == null || !Model.Any())
+{
+    <p>No books available to sell.</p>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-6">
+            @using (Html.BeginForm("SellBook", "Book", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-group">
+                    <label for="bookId" class="col-md-2 control-label">Book</label>
+                    <div class="col-md-10">
+                        <select name="bookId" class="form-control">
+                            @foreach (var book in Model)
+                            {
+                                <option value="@book.BookID">@book.Title (@book.Quantity available)</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="quantity" class="col-md-2 control-label">Quantity</label>
+                    <div class="col-md-10">
+                        <input type="number" name="quantity" min="1" class="form-control" placeholder="Enter quantity to sell" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Sell Book" class="btn btn-primary" />
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}
